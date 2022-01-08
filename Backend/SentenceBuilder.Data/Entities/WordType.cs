@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SentenceBuilder.Model
+namespace SentenceBuilder.Data.Entities
 {
 	public class WordType
 	{

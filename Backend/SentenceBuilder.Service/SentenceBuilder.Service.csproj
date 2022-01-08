@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GenericDapperRepo.Wrapper" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SentenceBuilder.Data\SentenceBuilder.Data.csproj" />
+  </ItemGroup>
+
 </Project>

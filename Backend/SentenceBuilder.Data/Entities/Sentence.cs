@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SentenceBuilder.Model
+namespace SentenceBuilder.Data.Entities
 {
 	public class Sentence
 	{
