@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -10,7 +11,7 @@ using SentenceBuilder.Service.Interface;
 
 namespace SentenceBuilder.Service.Tests
 {
-	public class Tests
+	public class TestWordTypeRepository
 	{
 		private const string ConnectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Initial Catalog=SentenceBuilderContext";
 		private TransactionScope _scope;
@@ -151,10 +152,16 @@ namespace SentenceBuilder.Service.Tests
 			const int wordTypeId = 201;
 
 			//Act
-			var actual = await sut.DeleteWordTypeAsync(wordTypeId);
+			//var actual = await sut.DeleteWordTypeAsync(wordTypeId);
+			var exception = Assert.ThrowsAsync<SqlException>(
+				() => sut.DeleteWordTypeAsync(wordTypeId));
+
 
 			//Assert
-			actual.Should().Be(numberOfRowsAffected);
+			exception.Message.Should().
+				Contain("The DELETE statement conflicted with the REFERENCE constraint " +
+				        "\"FK_Word_WordType\". The conflict occurred in database " +
+				        "\"SentenceBuilderContext\", table \"dbo.Word\", column 'WordTypeId'");
 		}
 
 		[Test]

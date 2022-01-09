@@ -35,6 +35,10 @@ CREATE TABLE Sentence(
   Text varchar(max) not null,
   RecordDate Date not null
 )
+
+--EXEC sp_RENAME 'Sentence.Name' , 'Text', 'COLUMN'
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX IX_WordType_Id ON WordType(WordTypeId)
 GO

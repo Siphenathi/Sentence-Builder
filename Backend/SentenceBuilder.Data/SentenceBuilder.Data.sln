@@ -5,11 +5,15 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentenceBuilder.Data", "SentenceBuilder.Data.csproj", "{49CC67B2-36F1-43CE-87D1-4373220C066E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder.Service", "..\SentenceBuilder.Service\SentenceBuilder.Service.csproj", "{94044D5D-B1F4-47AA-9B9E-6BD4880DFDC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentenceBuilder.Service", "..\SentenceBuilder.Service\SentenceBuilder.Service.csproj", "{94044D5D-B1F4-47AA-9B9E-6BD4880DFDC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder.Model", "..\SentenceBuilder.Model\SentenceBuilder.Model.csproj", "{424000A0-4A49-49B6-A0D1-BF99FAD4AB0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentenceBuilder.Model", "..\SentenceBuilder.Model\SentenceBuilder.Model.csproj", "{424000A0-4A49-49B6-A0D1-BF99FAD4AB0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder.Service.Tests", "..\SentenceBuilder.Service.Tests\SentenceBuilder.Service.Tests.csproj", "{0A3832CE-5A26-4484-A8A3-9E80D23A0AB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentenceBuilder.Service.Tests", "..\SentenceBuilder.Service.Tests\SentenceBuilder.Service.Tests.csproj", "{0A3832CE-5A26-4484-A8A3-9E80D23A0AB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder.Host", "..\SentenceBuilder.Host\SentenceBuilder.Host.csproj", "{1751ED09-9391-444F-B07F-A941CC2BDB6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder.Host.Tests", "..\SentenceBuilder.Host.Tests\SentenceBuilder.Host.Tests.csproj", "{7376594D-A406-4994-AFC9-A6534BDDB912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{0A3832CE-5A26-4484-A8A3-9E80D23A0AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A3832CE-5A26-4484-A8A3-9E80D23A0AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A3832CE-5A26-4484-A8A3-9E80D23A0AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1751ED09-9391-444F-B07F-A941CC2BDB6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1751ED09-9391-444F-B07F-A941CC2BDB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1751ED09-9391-444F-B07F-A941CC2BDB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1751ED09-9391-444F-B07F-A941CC2BDB6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7376594D-A406-4994-AFC9-A6534BDDB912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7376594D-A406-4994-AFC9-A6534BDDB912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7376594D-A406-4994-AFC9-A6534BDDB912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7376594D-A406-4994-AFC9-A6534BDDB912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
