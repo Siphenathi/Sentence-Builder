@@ -48,6 +48,7 @@ namespace SentenceBuilder.Host
 			app.UseRouting();
 
 			//app.UseAuthorization();
+			app.UseCors("default");
 
 			app.UseEndpoints(endpoints =>
 			{
