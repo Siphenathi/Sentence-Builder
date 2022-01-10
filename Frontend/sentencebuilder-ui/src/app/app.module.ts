@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import {SentenceComponent} from './sentence/sentence.component';
 import {HttpClientModule} from'@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
 import { RepositoryService } from './shared/repository.service';
@@ -25,7 +26,8 @@ import { RepositoryService } from './shared/repository.service';
     MainNavComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    SentenceComponent
   ],
   imports: [
     BrowserModule,

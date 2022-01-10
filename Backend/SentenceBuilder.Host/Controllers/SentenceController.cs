@@ -18,7 +18,7 @@ namespace SentenceBuilder.Host.Controllers
 
 		[HttpPost]
 		[Route("api/v1/[controller]/Add")]
-		public async Task<ActionResult> Add(SentenceViewModel sentenceViewModel)
+		public async Task<IActionResult> Add(SentenceViewModel sentenceViewModel)
 		{
 			try
 			{
@@ -28,7 +28,7 @@ namespace SentenceBuilder.Host.Controllers
 					RecordDate = DateTime.Now
 				};
 				var numberOfRowsAffected = await _sentenceRepository.AddSentence(sentence);
-				return StatusCode(200, $"{numberOfRowsAffected} row(s) affected.");
+				return Ok(numberOfRowsAffected);
 			}
 			catch (Exception exception)
 			{
