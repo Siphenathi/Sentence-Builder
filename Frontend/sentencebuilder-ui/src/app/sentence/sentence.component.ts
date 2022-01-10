@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RepositoryService} from '../shared/repository.service';
 import {WordTypeModel} from './_model/wordType.model';
 import {WordModel} from './_model/word.model';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { SentenceModel } from './_model/sentence.model';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -17,10 +17,11 @@ export class SentenceComponent implements OnInit  {
     public wordTypes : Array<WordTypeModel> = [];
     public words : Array<WordModel> = [];
     public sentence = '';
-    public saveSentenceFeedBack = '';
+    public feedBackMessage = '';
     public showSentenceList = true;
     public showCreateSentence = false;
     public dataSource = new MatTableDataSource<SentenceModel>();
+    public displayedColumns = ['text', 'recordDate'];
 
     @ViewChild(MatTable) table: MatTable<SentenceModel>;
     @ViewChild(MatSort) sort: MatSort;
@@ -30,6 +31,7 @@ export class SentenceComponent implements OnInit  {
 
     ngOnInit(): void {
         this.getWordTypes();
+        this.getSentences();
     } 
 
     public ngAfterViewInit(): void {
@@ -55,6 +57,13 @@ export class SentenceComponent implements OnInit  {
         }
     }
 
+    public changeCurrentDisplayPage = (showSentenceList:boolean, showCreateSentence: boolean) => {
+        this.showSentenceList = showSentenceList;
+        this.showCreateSentence = showCreateSentence;
+        this.getSentences();
+
+    }
+
     public removeLastWord = () => {
         if(this.sentence !== ""){
             var lastIndex = this.sentence.lastIndexOf(" ");
@@ -65,9 +74,7 @@ export class SentenceComponent implements OnInit  {
     public AddSentence = () => {
         if(this.sentence !== ''){
             this.saveSentence(this.sentence);
-            setTimeout( ()=> {
-                this.saveSentenceFeedBack = ''
-            }, 10000)
+            this.removeFeedBackMessageFromPage();
         }        
     }
 
@@ -76,8 +83,8 @@ export class SentenceComponent implements OnInit  {
             this.wordTypes = response as WordTypeModel[];
         },
         error => {
-            //Todo: use toast msg
-            console.log('error :', error);
+            this.feedBackMessage = `Failed to load Word Types. ${error.message}`;
+            this.removeFeedBackMessageFromPage();
         });
     }
 
@@ -86,20 +93,33 @@ export class SentenceComponent implements OnInit  {
             this.words = response as WordModel[];
         },
         error => {
-            //Todo: use toast msg
-            console.log('error :', error);
+            this.feedBackMessage = `Failed to load Words. ${error.message}`;
+            this.removeFeedBackMessageFromPage();
         });
+    }
+
+    private getSentences = () => {
+        this.repoService.getData("sentence").subscribe( response => {
+            this.dataSource.data = response as SentenceModel[];
+          });
     }
 
     private saveSentence = (sentence: string) => {
         this.repoService.create(`sentence/add`, {text:sentence}).subscribe(response => {
+            console.log('executed add sentence')
             if(response == 1){                
-                this.saveSentenceFeedBack = 'Saved sentence successfully!';
+                this.feedBackMessage = 'Saved sentence successfully!';
             }
         },
         error => {
-            //Todo: use toast msg
-            console.log('error :', error);
+            this.feedBackMessage = `Failed to save sentence. ${error.message}`;
+            this.removeFeedBackMessageFromPage();
         });
+    }
+
+    private removeFeedBackMessageFromPage = () => {
+        setTimeout( ()=> {
+            this.feedBackMessage = ''
+        }, 6000)
     }
 }

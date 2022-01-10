@@ -12,3 +12,33 @@
   border: 5px solid fafafa;
   padding: 10px;
 }
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.td.mat-cell {
+  border-bottom-width: 10px;
+}
+.mat-column-name {
+  border-right: 1px solid grey;
+  align-self: stretch;
+  text-align: center;
+}
+.mat-column-position {
+  border-right: 1px solid grey;
+  align-self: stretch;
+  text-align: center;
+}
+.mat-column-weight {
+  border-right: 1px solid grey;
+  align-self: stretch;
+  text-align: center;
+}
+.mat-column-symbol {
+  text-align: center;
+  align-self: stretch;
+}
+.mat-column-weight {
+  align-self: stretch;
+}

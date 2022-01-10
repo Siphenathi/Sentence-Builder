@@ -21,6 +21,11 @@ import { ContactComponent } from './contact/contact.component';
 import { RepositoryService } from './shared/repository.service';
 import {MatPaginatorModule } from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatFormFieldModule,
     MatSelectModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   entryComponents: [ ],
   providers: [RepositoryService],

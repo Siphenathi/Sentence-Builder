@@ -1,10 +1,35 @@
-<div class="container">
-    <h1 class="page-header">Sentence</h1>
+<div class="container content-center">
+    <h1>Sentence</h1>
     <div *ngIf="showSentenceList" class="ListAllSentence">
-        <h1>Change</h1>
+      <mat-grid-list cols="2" rowHeight="60px">
+        <mat-grid-tile>
+            <div fxLayout fxLayoutAlign="center center">
+                <mat-form-field fxFlex="40%">
+                  <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search">
+                </mat-form-field>    
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-button (click)="changeCurrentDisplayPage(false, true)" mat-flat-button color="primary">Add Sentence</button>
+        </mat-grid-tile>
+      </mat-grid-list> 
+      <table mat-table [dataSource]="dataSource" #sentencetable matSort>
+          <ng-container matColumnDef="text">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Text </th>
+            <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+        </ng-container>
+        <ng-container matColumnDef="recordDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Record Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.recordDate}} </td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': row.isSeen }"></tr>
+      </table>
+      <mat-paginator [pageSize]="6" [pageSizeOptions]="[2, 4, 6, 10, 20]" style="width:375px">
+      </mat-paginator>
     </div>
     <div *ngIf="showCreateSentence"  class="CreateNewSentence">
-      <div class="content-center">
+      <div>
         <mat-form-field>
           <mat-label>Word Types</mat-label>
           <select matNativeControl required>
@@ -33,15 +58,19 @@
       </div>
         <div style="align-items: center;">
           <mat-form-field class="stretch-height" style="width: 70%;">
-            <textarea readonly matInput formControlName="myControl" class="sentence-textarea" ng-model='sentence'>{{sentence}}</textarea>
+            <textarea readonly matInput class="sentence-textarea" ng-model='sentence'>{{sentence}}</textarea>
           </mat-form-field>
         </div> 
-        <div class="content-center">
-          <button mat-button (click)="AddSentence()" mat-flat-button color="warn">Save</button>
-          <br/>
-          <div style="margin-top: 5px;">
-            <mat-label style="color: rgb(255, 60, 0);" >{{saveSentenceFeedBack}}</mat-label>
-          </div>        
+        <div>
+          <button mat-button (click)="AddSentence()" mat-flat-button color="primary">Save</button>              
+        </div> 
+        <div>
+          <button mat-icon-button color="primary" (click)="changeCurrentDisplayPage(true, false)">
+            <mat-icon class="mat-18">go to List</mat-icon>
+          </button>
         </div>
+        <div>
+          <mat-label style="color: rgb(255, 60, 0);" >{{feedBackMessage}}</mat-label>
+        </div> 
     </div>
 </div>

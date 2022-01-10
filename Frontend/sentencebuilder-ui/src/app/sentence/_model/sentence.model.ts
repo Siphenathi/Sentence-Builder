@@ -1,3 +1,4 @@
 export type SentenceModel = {
-    text: string
+    text: string,
+    recordDate: Date
 }
