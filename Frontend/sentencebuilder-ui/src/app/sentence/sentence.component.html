@@ -1,42 +1,47 @@
 <div class="container">
-    <h1 class="page-header">Construct Sentence</h1>
-    <div class="content-center">
-      <mat-form-field>
-        <mat-label>Word Types</mat-label>
-        <select matNativeControl required>
-          <option *ngFor="let wt of wordTypes" [value]="wt.wordTypeId" (click)="wordTypeDropDownClick(wt.wordTypeId)">
-            {{ wt.name }}
-          </option>
-        </select>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <mat-label>Word</mat-label>
-        <select matNativeControl required>
-          <option *ngFor="let wt of words" [value]="wt.wordId" (click)="wordDropDownClick(wt.name)">
-            {{ wt.name }}
-          </option>
-        </select>
-      </mat-form-field>
-      <br/>
-      <div>
-        <button mat-button (click)="removeLastWord()" mat-flat-button color="warn">Remove Last word</button>
-      </div>
-      <div style="margin-top: 10px;">
-        <button mat-button (click)="clearSentenceTextBox()" mat-flat-button color="warn" >Clear</button>
-      </div>  
-      
+    <h1 class="page-header">Sentence</h1>
+    <div *ngIf="showSentenceList" class="ListAllSentence">
+        <h1>Change</h1>
     </div>
-      <div style="align-items: center;">
-        <mat-form-field class="stretch-height" style="width: 70%;">
-          <textarea readonly matInput formControlName="myControl" class="sentence-textarea" ng-model='sentence'>{{sentence}}</textarea>
-        </mat-form-field>
-      </div> 
+    <div *ngIf="showCreateSentence"  class="CreateNewSentence">
       <div class="content-center">
-        <button mat-button (click)="AddSentence()" mat-flat-button color="warn">Save</button>
+        <mat-form-field>
+          <mat-label>Word Types</mat-label>
+          <select matNativeControl required>
+            <option *ngFor="let wt of wordTypes" [value]="wt.wordTypeId" (click)="wordTypeDropDownClick(wt.wordTypeId)">
+              {{ wt.name }}
+            </option>
+          </select>
+        </mat-form-field>
         <br/>
-        <div style="margin-top: 5px;">
-          <mat-label style="color: rgb(255, 60, 0);" >{{saveSentenceFeedBack}}</mat-label>
-        </div>        
+        <mat-form-field>
+          <mat-label>Word</mat-label>
+          <select matNativeControl required>
+            <option *ngFor="let wt of words" [value]="wt.wordId" (click)="wordDropDownClick(wt.name)">
+              {{ wt.name }}
+            </option>
+          </select>
+        </mat-form-field>
+        <br/>
+        <div>
+          <button mat-button (click)="removeLastWord()" mat-flat-button color="warn">Remove Last word</button>
+        </div>
+        <div style="margin-top: 10px;">
+          <button mat-button (click)="clearSentenceTextBox()" mat-flat-button color="warn" >Clear</button>
+        </div> 
+        
       </div>
+        <div style="align-items: center;">
+          <mat-form-field class="stretch-height" style="width: 70%;">
+            <textarea readonly matInput formControlName="myControl" class="sentence-textarea" ng-model='sentence'>{{sentence}}</textarea>
+          </mat-form-field>
+        </div> 
+        <div class="content-center">
+          <button mat-button (click)="AddSentence()" mat-flat-button color="warn">Save</button>
+          <br/>
+          <div style="margin-top: 5px;">
+            <mat-label style="color: rgb(255, 60, 0);" >{{saveSentenceFeedBack}}</mat-label>
+          </div>        
+        </div>
+    </div>
 </div>

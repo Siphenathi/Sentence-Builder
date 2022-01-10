@@ -20,11 +20,13 @@ namespace SentenceBuilder.Host.Controllers
 
 		[HttpGet]
 		[Route("api/v1/[controller]")]
-		public async Task<ActionResult<IEnumerable<Sentence>>> GetAsync()
+		public async Task<ActionResult<IEnumerable<SentenceListModel>>> GetAsync()
 		{
 			var allSentences = await _sentenceRepository.GetAllSentences();
-			return !allSentences.Any() ? StatusCode(404, "No sentences found yet!") : 
-				new ActionResult<IEnumerable<Sentence>>(allSentences);
+			var enumerable = allSentences as Sentence[] ?? allSentences.ToArray();
+			return !enumerable.Any()
+				? StatusCode(404, "No sentences found yet!")
+				: new ActionResult<IEnumerable<SentenceListModel>>(MapSentenceObject(enumerable));
 		}
 
 		[HttpPost]
@@ -45,6 +47,20 @@ namespace SentenceBuilder.Host.Controllers
 			{
 				return StatusCode(500, exception.Message);
 			}
+		}
+
+		private static IEnumerable<SentenceListModel> MapSentenceObject(IEnumerable<Sentence> sentences)
+		{
+			var sentenceListModels = new List<SentenceListModel>();
+			sentences.ToList().ForEach(sentence =>
+			{
+				sentenceListModels.Add(new SentenceListModel
+				{
+					Text = sentence.Text,
+					RecordDate = sentence.RecordDate
+				});
+			});
+			return sentenceListModels;
 		}
 	}
 }

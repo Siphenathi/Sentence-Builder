@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {RepositoryService} from '../shared/repository.service';
 import {WordTypeModel} from './_model/wordType.model';
 import {WordModel} from './_model/word.model';
-// import { Observable } from 'rxjs';
-// import 'rxjs/add/operator/map';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { SentenceModel } from './_model/sentence.model';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-sentence',
@@ -16,12 +18,28 @@ export class SentenceComponent implements OnInit  {
     public words : Array<WordModel> = [];
     public sentence = '';
     public saveSentenceFeedBack = '';
+    public showSentenceList = true;
+    public showCreateSentence = false;
+    public dataSource = new MatTableDataSource<SentenceModel>();
+
+    @ViewChild(MatTable) table: MatTable<SentenceModel>;
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(private repoService: RepositoryService) { }
 
     ngOnInit(): void {
         this.getWordTypes();
     } 
+
+    public ngAfterViewInit(): void {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+
+    public doFilter = (value: string) => {
+        this.dataSource.filter = value.trim().toLocaleLowerCase();
+      }
 
     public wordTypeDropDownClick = (wordTypeDropDownValue: number) => {
         this.getWords(wordTypeDropDownValue);

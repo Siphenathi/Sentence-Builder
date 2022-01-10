@@ -19,6 +19,8 @@ import {SentenceComponent} from './sentence/sentence.component';
 import {HttpClientModule} from'@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
 import { RepositoryService } from './shared/repository.service';
+import {MatPaginatorModule } from '@angular/material/paginator';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { RepositoryService } from './shared/repository.service';
     HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule,
+    MatPaginatorModule
   ],
   entryComponents: [ ],
   providers: [RepositoryService],
