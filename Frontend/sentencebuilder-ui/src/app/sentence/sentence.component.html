@@ -19,7 +19,13 @@
         </select>
       </mat-form-field>
       <br/>
-      <button mat-button (click)="removeLastWord()" mat-flat-button color="warn">Remove Last word</button>
+      <div>
+        <button mat-button (click)="removeLastWord()" mat-flat-button color="warn">Remove Last word</button>
+      </div>
+      <div style="margin-top: 10px;">
+        <button mat-button (click)="clearSentenceTextBox()" mat-flat-button color="warn" >Clear</button>
+      </div>  
+      
     </div>
       <div style="align-items: center;">
         <mat-form-field class="stretch-height" style="width: 70%;">
@@ -27,8 +33,10 @@
         </mat-form-field>
       </div> 
       <div class="content-center">
-        <button mat-button (click)="AddSentence" mat-flat-button color="warn">Save</button>
+        <button mat-button (click)="AddSentence()" mat-flat-button color="warn">Save</button>
         <br/>
-        <mat-label style="color: rgb(255, 60, 0);">{{saveSentenceFeedBack}}</mat-label>
+        <div style="margin-top: 5px;">
+          <mat-label style="color: rgb(255, 60, 0);" >{{saveSentenceFeedBack}}</mat-label>
+        </div>        
       </div>
 </div>

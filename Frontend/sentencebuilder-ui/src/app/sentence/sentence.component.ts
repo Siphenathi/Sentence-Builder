@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RepositoryService} from '../shared/repository.service';
 import {WordTypeModel} from './_model/wordType.model';
 import {WordModel} from './_model/word.model';
@@ -11,7 +11,7 @@ import {WordModel} from './_model/word.model';
     styleUrls: ['./sentence.component.css']
 })
 
-export class SentenceComponent implements OnInit, AfterViewInit  {
+export class SentenceComponent implements OnInit  {
     public wordTypes : Array<WordTypeModel> = [];
     public words : Array<WordModel> = [];
     public sentence = '';
@@ -21,14 +21,7 @@ export class SentenceComponent implements OnInit, AfterViewInit  {
 
     ngOnInit(): void {
         this.getWordTypes();
-    }
-
-    ngAfterViewInit(){
-        setTimeout( ()=> {
-            this.saveSentenceFeedBack = ''
-        }, 10000)
-      }
-     
+    } 
 
     public wordTypeDropDownClick = (wordTypeDropDownValue: number) => {
         this.getWords(wordTypeDropDownValue);
@@ -36,6 +29,12 @@ export class SentenceComponent implements OnInit, AfterViewInit  {
 
     public wordDropDownClick = (word: string) => {
         this.sentence += ` ${word}`;
+    }
+
+    public clearSentenceTextBox = () => {
+        if(this.sentence !== ''){
+            this.sentence = '';
+        }
     }
 
     public removeLastWord = () => {
@@ -46,8 +45,12 @@ export class SentenceComponent implements OnInit, AfterViewInit  {
     }
 
     public AddSentence = () => {
-        this.saveSentence(this.sentence);
-
+        if(this.sentence !== ''){
+            this.saveSentence(this.sentence);
+            setTimeout( ()=> {
+                this.saveSentenceFeedBack = ''
+            }, 10000)
+        }        
     }
 
     private getWordTypes = () => {

@@ -21,7 +21,7 @@ namespace SentenceBuilder.Host.Controllers
 		public async Task<ActionResult<IEnumerable<WordType>>> GetAsync()
 		{
 			var allWordTypes = await _wordTypeRepository.GetAllWordTypes();
-			return !allWordTypes.Any() ? StatusCode(404, "No words found yet!") : new ActionResult<IEnumerable<WordType>>(allWordTypes);
+			return !allWordTypes.Any() ? StatusCode(404, "No word types found yet!") : new ActionResult<IEnumerable<WordType>>(allWordTypes);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using FluentAssertions;
@@ -23,6 +24,19 @@ namespace SentenceBuilder.Service.Tests
 		public void TearDown()
 		{
 			_scope.Dispose();
+		}
+
+		[Test]
+		public async Task GetAllSentences_WhenCalled_ShouldReturnAllSentences()
+		{
+			//Arrange
+			var sut = CreateSentenceRepository(ConnectionString);
+
+			//Act
+			var actual = await sut.GetAllSentences();
+
+			//Assert
+			actual.Count().Should().BeGreaterOrEqualTo(0);
 		}
 
 		[Test]

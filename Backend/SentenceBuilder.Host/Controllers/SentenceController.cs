@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SentenceBuilder.Data.Entities;
@@ -16,6 +18,15 @@ namespace SentenceBuilder.Host.Controllers
 			_sentenceRepository = sentenceRepository;
 		}
 
+		[HttpGet]
+		[Route("api/v1/[controller]")]
+		public async Task<ActionResult<IEnumerable<Sentence>>> GetAsync()
+		{
+			var allSentences = await _sentenceRepository.GetAllSentences();
+			return !allSentences.Any() ? StatusCode(404, "No sentences found yet!") : 
+				new ActionResult<IEnumerable<Sentence>>(allSentences);
+		}
+
 		[HttpPost]
 		[Route("api/v1/[controller]/Add")]
 		public async Task<IActionResult> Add(SentenceViewModel sentenceViewModel)
@@ -24,7 +35,7 @@ namespace SentenceBuilder.Host.Controllers
 			{
 				var sentence = new Sentence
 				{
-					Text = sentenceViewModel.Text,
+					Text = sentenceViewModel.Text.Trim(),
 					RecordDate = DateTime.Now
 				};
 				var numberOfRowsAffected = await _sentenceRepository.AddSentence(sentence);
